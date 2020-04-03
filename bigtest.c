@@ -2,17 +2,22 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
-void runit(const char *test);
+void runit(char *test, char **envp);
 
-int main(int argc, char *argv, char **envp)
+int main(int argc, char *argv[], char **envp)
 {
 	ssize_t linesize;
 	char *buf = NULL;
 	size_t len = 0;
-	char *commands[3];
-	char *envar[] = {"nothing", NULL};
+	struct stat st;
 
+	if (argc == -1 || argv[0] == NULL)
+		return (0);
+	if (stat(argv[1], &st) == 0)
+		printf("AC FILE FOUND\n");
 	while (1)
 	{
 		printf("Entering the shell...\n");
@@ -24,32 +29,30 @@ int main(int argc, char *argv, char **envp)
 			free(buf);
 			return(-1);
 		}
-		/*commands[0] = buf;*/
-		commands[0] = ".";
-		commands[1] = NULL;
-		if (fork() == 0)
-		{
-			if (execve(buf, commands, envar) == -1)
-				printf("Failed\n");
-		}
+		if (stat(buf, &st) == 0)
+			printf("File is found\n");
+		runit(buf, envp);
 		free(buf);
 	}
 	printf("Line size: %d", (int)linesize);
 	return(0);
 }
 
-void runit(const char *test)
+void runit(char *test, char **envp)
 {
 	char *argv[3];
-	char *evars[] = {NULL};
+	struct stat st;
 
-	printf("%s\n", test);
-	/*argv[0] = test;*/
-	argv[0] = ".";
-	argv[1] = NULL;
+	if (stat(test, &st) == 0)
+		printf("File found!\n");
+	else
+		printf("File not found\n");
+	argv[0] = test;
+	argv[1] = ".";
+	argv[2] = NULL;
 	if (fork() == 0)
 	{
-		if (execve((char *)test, argv, evars) == -1)
+		if (execve(argv[0], argv, envp) == -1)
 		{
 			printf("We done didly fucked up\n");
 		}
