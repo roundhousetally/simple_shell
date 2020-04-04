@@ -33,6 +33,7 @@ int main(int argc, char *argv[], char **envp)
 			printf("File is found\n");
 		runit(buf, envp);
 		free(buf);
+		buf = NULL;
 	}
 	printf("Line size: %d", (int)linesize);
 	return(0);
@@ -42,7 +43,13 @@ void runit(char *test, char **envp)
 {
 	char *argv[3];
 	struct stat st;
+	int i = 0;
 
+	while (test[i] != '\n')
+		i++;
+	test[i] = '\0';
+	printf("%c", test[i]);
+	printf("The buffer is: %s\n", test);
 	if (stat(test, &st) == 0)
 		printf("File found!\n");
 	else
