@@ -8,11 +8,14 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <string.h>
 
 /** Launch Function */
 void runit(char *test, char **envp);
 
 /** Utility Functions */
 int _strlen(char *s);
+int _strtok(char *string, char *spacers);
+void freestrtok(char **string);
 
 #endif
