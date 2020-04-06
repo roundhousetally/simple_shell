@@ -1,5 +1,5 @@
 # temp files #
-*.c~
+*~
 
 # executable #
 *.o
