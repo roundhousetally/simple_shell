@@ -17,5 +17,6 @@ void runit(char *test, char **envp);
 int _strlen(char *s);
 int _strtok(char *string, char *spacers);
 void freestrtok(char **string);
+char *_strdup(char *str);
 
 #endif

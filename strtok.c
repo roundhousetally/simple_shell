@@ -30,7 +30,7 @@ char **splitstring(char *s, char *delim)
 	while (token != NULL)
 	{
 		printf("Length of token: %d\n", (_strlen(token) + 1));
-		alltokens[i] = malloc(sizeof(char *) * _strlen(token));
+		alltokens[i] = _strdup(token);
 		if (alltokens[i] == NULL)
 		{
 			while (i >= 0)
@@ -40,7 +40,6 @@ char **splitstring(char *s, char *delim)
 			free(alltokens);
 			return (0);
 		}
-		alltokens[i] = token;
 		token = strtok(NULL, delim);
 		i++;
 	}
