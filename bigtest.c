@@ -48,6 +48,7 @@ void runit(char *test, char **envp)
 	while (test[i] != '\n')
 		i++;
 	test[i] = '\0';
+	printf("Buffer is: %s\n", test);
 	printf("%c", test[i]);
 	printf("The buffer is: %s\n", test);
 	if (stat(test, &st) == 0)
