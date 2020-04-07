@@ -21,8 +21,7 @@ int main(int argc, char *argv[], char **envp)
 		printf("AC FILE FOUND\n");
 	while (1)
 	{
-		printf("Entering the shell...\n");
-		printf("$ ");
+		moneyp();
 		linesize = getline(&buf, &len, stdin);
 		if (buf == NULL)
 		{

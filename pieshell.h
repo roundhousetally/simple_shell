@@ -12,6 +12,7 @@
 
 /** Launch Function */
 void runit(char *test, char **envp);
+void moneyp(void);
 
 /** Utility Functions */
 int _strlen(char *s);
