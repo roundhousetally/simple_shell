@@ -7,23 +7,37 @@
  * Return: void
  */
 
-void runit(char *test, char **envp)
+void runit(char **test, char **envp)
 {
-	char *argv[3];
 	int i = 0;
+	pid_t pid;
+	char **args;
+	char *detest = *test;
 
-	while (test[i] != '\n')
+	while (detest[i] != '\n')
 		i++;
-	test[i] = '\0';
-	argv[0] = test;
-	argv[1] = ".";
-	argv[2] = NULL;
-	if (fork() == 0)
+	detest[i] = '\0';
+	args = strtotok(detest, " ");
+	free(detest);
+	pid = fork();
+	if (pid == 0)
 	{
-		if (execve(argv[0], argv, envp) == -1)
+		if (execve(args[0], args, envp) == -1)
 		{
+			freestrtok(args);
 			printf("File not found\n");
 			return;
 		}
+	}
+	else if (pid == -1)
+	{
+		freestrtok(args);
+		printf("Process failed\n");
+		return;
+	}
+	else
+	{
+		freestrtok(args);
+		wait(NULL);
 	}
 }

@@ -11,7 +11,7 @@
 #include <string.h>
 
 /** Launch Function */
-void runit(char *test, char **envp);
+void runit(char **test, char **envp);
 void moneyp(void);
 
 /** Utility Functions */
@@ -23,6 +23,6 @@ int _arraylength(char *string, char *delim);
 char **strtotok(char *s, char *delim);
 void freestrtok(char **string);
 char *_strdup(char *str);
-
+char *_strcpy(char *dest, char *src);
 
 #endif

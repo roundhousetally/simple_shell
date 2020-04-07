@@ -23,7 +23,7 @@ char **strtotok(char *s, char *delim)
 		free(ssave);
 		return (0);
 	}
-	*ssave = _strcpy(ssave, s);
+	ssave = _strcpy(ssave, s);
 	arraylength = _arraylength(ssave, delim);
 	alltokens = malloc(sizeof(char *) * (arraylength + 1));
 	token = strtok(s, delim);
@@ -34,7 +34,6 @@ char **strtotok(char *s, char *delim)
 	}
 	while (token != NULL)
 	{
-		printf("Length of token: %d\n", (_strlen(token) + 1));
 		alltokens[i] = _strdup(token);
 		if (alltokens[i] == NULL)
 		{

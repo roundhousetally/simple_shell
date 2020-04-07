@@ -20,16 +20,18 @@ int main(int argc, char *argv[], char **envp)
 	{
 		moneyp();
 		linesize = getline(&buf, &len, stdin);
-		if (buf == EOF)
-			printf("That's how that works\n");
-		if (buf == NULL)
+		if (linesize == -1)
 		{
-			printf("Failed\n");
 			free(buf);
 			return (-1);
 		}
-		runit(buf, envp);
-		free(buf);
+		if (buf == NULL)
+		{
+			free(buf);
+			printf("Failed to store input\n");
+			return (-1);
+		}
+		runit(&buf, envp);
 		buf = NULL;
 	}
 	return (0);
