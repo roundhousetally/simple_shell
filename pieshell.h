@@ -18,7 +18,8 @@ int _strlen(char *s);
 int _strcmp(char *s1, char *s2);
 void _puts(char *str);
 int _putchar(char c);
-int _strtok(char *string, char *spacers);
+int _arraylength(char *string, char *delim);
+char **strtotok(char *s, char *delim);
 void freestrtok(char **string);
 char *_strdup(char *str);
 

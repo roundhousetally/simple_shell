@@ -14,7 +14,7 @@ int main(void)
 	{
 		printf("Failed\n");
 		free(buf);
-		return(-1);
+		return (-1);
 	}
 	printf("%s - %u\n", buf, (unsigned int)linesize);
 	free(buf);
