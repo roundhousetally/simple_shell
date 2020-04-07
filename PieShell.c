@@ -18,7 +18,7 @@ int main(int argc, char *argv[], char **envp)
 		return (0);
 	while (1)
 	{
-		printf("$ ");
+		moneyp();
 		linesize = getline(&buf, &len, stdin);
 		if (buf == EOF)
 			printf("That's how that works\n");
