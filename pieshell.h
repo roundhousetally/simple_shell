@@ -24,5 +24,6 @@ char **strtotok(char *s, char *delim);
 void freestrtok(char **string);
 char *_strdup(char *str);
 char *_strcpy(char *dest, char *src);
+char *_strcat(char *dest, char *src);
 
 #endif
