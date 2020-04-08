@@ -13,6 +13,9 @@
 /** Launch Function */
 void runit(char **test, char **envp);
 void moneyp(void);
+void getpath(char **s, char **envp);
+void pathhelp(char **s, char *path, char **envp);
+
 
 /** Utility Functions */
 int _strlen(char *s);
