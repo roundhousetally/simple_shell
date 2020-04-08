@@ -3,6 +3,7 @@
 int _strlen(char *s);
 char *_strdup(char *str);
 char *_strcpy(char *dest, char *src);
+char *_strcat(char *dest, char *src);
 
 /**
  * _strcmp- compares two strings
@@ -107,4 +108,32 @@ int _strlen(char *s)
 	while (s[i] != '\0')
 		i++;
 	return (i);
+}
+
+/**
+ *_strcat - concatenate two string together
+ *
+ *@dest: the string to be appended to.
+ *@src: the string to append.
+ *
+ *Return: a pointer to string dest
+ *
+ */
+char *_strcat(char *dest, char *src)
+{
+	char *together = dest;
+
+	if (('\0' != dest) && ('\0' != src))
+	{
+		while ('\0' != *dest)
+		{
+			dest++;
+		}
+		while ('\0' != *src)
+		{
+			*dest++ = *src++;
+		}
+		*dest = '\0';
+	}
+	return (together);
 }
