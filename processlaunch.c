@@ -13,12 +13,20 @@ void runit(char **test, char **envp)
 	pid_t pid;
 	char **args;
 	char *detest = *test;
+	struct stat sfile;
 
 	while (detest[i] != '\n')
 		i++;
 	detest[i] = '\0';
 	args = strtotok(detest, " ");
 	free(detest);
+	if ((stat(args[0], &sfile) == -1))
+	{
+		getpath(args, envp);
+		printf("%s\n", args[0]);
+		freestrtok(args);
+		return;
+	}
 	pid = fork();
 	if (pid == 0)
 	{
