@@ -13,14 +13,13 @@ void runit(char **test, char **envp)
 	pid_t pid = 0;
 	char **args = NULL;
 	char *detest = *test;
-	struct stat sfile;
 
 	while (detest[i] != '\n')
 		i++;
 	detest[i] = '\0';
 	args = strtotok(detest, " ");
 	free(detest);
-	if ((stat(args[0], &sfile) == -1))
+	if ((access(args[0], X_OK) == -1))
 	{
 		getpath(args, envp);
 		freestrtok(args);

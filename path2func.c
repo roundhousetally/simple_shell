@@ -10,17 +10,25 @@
 void pathhelp(char **s, char *path, char **envp)
 {
 	int i = 0;
-	char **tokedpath = NULL;
-	struct stat sfile = {0};
+	char **tokedpath;
 	pid_t pid;
 	char *sl = "/";
+	int slen;
+	char *save;
+	char *colon = ":";
 
-	tokedpath = strtotok(path, ":");
+	printf("Path is: %s\n", path);
+	tokedpath = strtotok(path, colon);
 	while (tokedpath[i] != NULL)
 	{
+		slen = _strlen(tokedpath[i]);
+		save = _strdup(tokedpath[i]);
+		tokedpath[i] = malloc(sizeof(char) * (slen + _strlen(s[0]) + 3));
+		_strcpy(tokedpath[i], save);
+		free(save);
 		_strcat(tokedpath[i], sl);
 		_strcat(tokedpath[i], s[0]);
-		if (stat(tokedpath[i], &sfile) != -1)
+		if (access(tokedpath[i], X_OK) != -1)
 		{
 			s[0] = NULL;
 			s[0] = _strdup(tokedpath[i]);
@@ -36,7 +44,7 @@ void pathhelp(char **s, char *path, char **envp)
 			}
 			else if (pid == -1)
 			{
-				printf("fork failure");
+				printf("fork failure\n");
 				freestrtok(tokedpath);
 				return;
 			}

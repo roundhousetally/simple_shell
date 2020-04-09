@@ -2,8 +2,8 @@
 
 int main(void)
 {
-	char test[] = "This is a test string";
-	char *del = " ";
+	char test[] = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games";
+	char *del = ":";
 	int i = 0;
 	char **result;
 
