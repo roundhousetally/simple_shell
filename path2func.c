@@ -15,8 +15,10 @@ void pathhelp(char **s, char *path, char **envp)
 	char *sl = "/";
 	int slen;
 	char *save;
+	char *colon = ":";
 
-	tokedpath = strtotok(path, ":");
+	printf("Path is: %s\n", path);
+	tokedpath = strtotok(path, colon);
 	while (tokedpath[i] != NULL)
 	{
 		slen = _strlen(tokedpath[i]);

@@ -32,7 +32,8 @@ void getpath(char **s, char **envp)
 				count++;
 				n++;
 			}
-			passedpath = malloc(sizeof(char) * count);
+			printf("Count: %d\nStrlen: %d\n", count, (_strlen(envp[i]) - 5));
+			passedpath = malloc(sizeof(char *) * (count + 3));
 			if (passedpath == NULL)
 			{
 				printf("malloc error\n");

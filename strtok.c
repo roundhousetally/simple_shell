@@ -1,6 +1,5 @@
 #include "pieshell.h"
 
-int _arraylength(char *string, char *delim);
 
 /**
  * strtotok - breaks a string into tokens and returns an array of each token.
@@ -9,7 +8,7 @@ int _arraylength(char *string, char *delim);
  * Return: array of tokens
  */
 
-char **strtotok(char *s, char *delim)
+char **strtotok(char *s, const char *delim)
 {
 	char *token = NULL;
 	char **alltokens = NULL;
@@ -21,21 +20,24 @@ char **strtotok(char *s, char *delim)
 	ssave = malloc(sizeof(char) * (slen + 1));
 	if (ssave == NULL)
 	{
-		free(ssave);
 		return (0);
 	}
 	ssave = _strcpy(ssave, s);
 	arraylength = _arraylength(ssave, delim);
-	alltokens = malloc(sizeof(char *) * (arraylength + 1));
+	alltokens = malloc(sizeof(char *) * (arraylength + 2));
 	token = strtok(s, delim);
 	if (alltokens == NULL)
 	{
 		free(alltokens);
+		free(ssave);
 		return (0);
 	}
 	while (token != NULL)
 	{
-		alltokens[i] = _strdup(token);
+		printf("Token length: %d\n", _strlen(token));
+		alltokens[i] = malloc(sizeof(unsigned long) * (_strlen(token) + 1));
+		alltokens[i] = _strcpy(alltokens[i], token);
+		printf("The token is: %s\nLength is: %d\nSize is: %lu\n", alltokens[i], _strlen(alltokens[i]), sizeof(alltokens[i]));
 		if (alltokens[i] == NULL)
 		{
 			while (i >= 0)
@@ -43,6 +45,7 @@ char **strtotok(char *s, char *delim)
 				free(alltokens[i]);
 			}
 			free(alltokens);
+			free(ssave);
 			return (0);
 		}
 		token = strtok(NULL, delim);
@@ -61,7 +64,7 @@ char **strtotok(char *s, char *delim)
  * Return: Length of array
  */
 
-int _arraylength(char *string, char *delim)
+int _arraylength(char *string, const char *delim)
 {
 	int count = 0;
 	char *token;
