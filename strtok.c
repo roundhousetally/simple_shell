@@ -18,7 +18,7 @@ char **strtotok(char *s, char *delim)
 	char *ssave = NULL;
 	slen = _strlen(s);
 
-	ssave = malloc(sizeof(char ) * (slen + 1));
+	ssave = malloc(sizeof(char) * (slen + 1));
 	if (ssave == NULL)
 	{
 		free(ssave);

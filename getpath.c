@@ -11,10 +11,8 @@ void getpath(char **s, char **envp)
 {
 	int i = 0, n = 0, count = 1;
 	char *setp = "PATH=";
-	char first[5];
+	char first[6];
 	char *passedpath = NULL;
-	int slen = 0;
-	slen = _strlen(s[0]);
 
 	first[0] = '\0';
 
@@ -34,8 +32,7 @@ void getpath(char **s, char **envp)
 				count++;
 				n++;
 			}
-
-			passedpath = malloc(sizeof(char) * (count + slen));
+			passedpath = malloc(sizeof(char) * count);
 			if (passedpath == NULL)
 			{
 				printf("malloc error\n");
