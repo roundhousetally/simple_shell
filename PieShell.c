@@ -10,7 +10,7 @@
 
 int main(int argc, char *argv[], char **envp)
 {
-	ssize_t linesize;
+	ssize_t linesize = 0;
 	char *buf = NULL;
 	size_t len = 0;
 
@@ -34,5 +34,7 @@ int main(int argc, char *argv[], char **envp)
 		runit(&buf, envp);
 		buf = NULL;
 	}
+	free(buf);
+	fflush(stdout);
 	return (0);
 }

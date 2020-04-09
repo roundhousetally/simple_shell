@@ -42,7 +42,7 @@ int _strcmp(char *s1, char *s2)
 
 char *_strdup(char *str)
 {
-	char *t;
+	char *t = NULL;
 	int i;
 	int j;
 

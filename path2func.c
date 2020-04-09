@@ -10,8 +10,8 @@
 void pathhelp(char **s, char *path, char **envp)
 {
 	int i = 0;
-	char **tokedpath;
-	struct stat sfile;
+	char **tokedpath = NULL;
+	struct stat sfile = {0};
 	pid_t pid;
 	char *sl = "/";
 

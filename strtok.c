@@ -11,13 +11,14 @@ int _arraylength(char *string, char *delim);
 
 char **strtotok(char *s, char *delim)
 {
-	char *token;
-	char **alltokens;
-	int i = 0, arraylength;
-	int slen = _strlen(s);
-	char *ssave;
+	char *token = NULL;
+	char **alltokens = NULL;
+	int i = 0, arraylength = 0;
+	int slen = 0;
+	char *ssave = NULL;
+	slen = _strlen(s);
 
-	ssave = malloc(sizeof(char) * (slen + 1));
+	ssave = malloc(sizeof(char ) * (slen + 1));
 	if (ssave == NULL)
 	{
 		free(ssave);
