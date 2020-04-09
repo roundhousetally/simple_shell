@@ -35,6 +35,6 @@ int main(int argc, char *argv[], char **envp)
 		buf = NULL;
 	}
 	free(buf);
-	fflush(stdout);
+/**	fflush(stdout); */
 	return (0);
 }

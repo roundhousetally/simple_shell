@@ -10,8 +10,8 @@
 void runit(char **test, char **envp)
 {
 	int i = 0;
-	pid_t pid;
-	char **args;
+	pid_t pid = 0;
+	char **args = NULL;
 	char *detest = *test;
 	struct stat sfile;
 
@@ -23,7 +23,6 @@ void runit(char **test, char **envp)
 	if ((stat(args[0], &sfile) == -1))
 	{
 		getpath(args, envp);
-		printf("%s\n", args[0]);
 		freestrtok(args);
 		return;
 	}
@@ -48,4 +47,5 @@ void runit(char **test, char **envp)
 		freestrtok(args);
 		wait(NULL);
 	}
+	free(test);
 }
