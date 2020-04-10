@@ -15,7 +15,7 @@ void runit(char **test, char **envp);
 void moneyp(void);
 void getpath(char **s, char **envp);
 void pathhelp(char **s, char *path, char **envp);
-
+int pathexec(char **s, char **tokedpath, char **envp, int i);
 
 /** Utility Functions */
 int _strlen(char *s);

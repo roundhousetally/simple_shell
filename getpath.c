@@ -2,19 +2,16 @@
 
 /**
  * getpath - getting the path
- *
- *
+ * @s: The arguments
+ * @envp: Environment
  *
  */
 
 void getpath(char **s, char **envp)
 {
 	int i = 0, n = 0, count = 1;
-	char *setp = "PATH=";
+	char *setp = "PATH=", *passedpath;
 	char first[6];
-	char *passedpath = NULL;
-
-	first[0] = '\0';
 
 	while (envp[i] != NULL)
 	{
@@ -32,7 +29,6 @@ void getpath(char **s, char **envp)
 				count++;
 				n++;
 			}
-			printf("Count: %d\nStrlen: %d\n", count, (_strlen(envp[i]) - 5));
 			passedpath = malloc(sizeof(char *) * (count + 3));
 			if (passedpath == NULL)
 			{
@@ -47,6 +43,7 @@ void getpath(char **s, char **envp)
 				count++;
 				n++;
 			}
+			passedpath[count] = '\0';
 			pathhelp(s, passedpath, envp);
 			free(passedpath);
 		}

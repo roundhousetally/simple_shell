@@ -46,5 +46,4 @@ void runit(char **test, char **envp)
 		freestrtok(args);
 		wait(NULL);
 	}
-	free(test);
 }

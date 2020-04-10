@@ -12,10 +12,8 @@ char **strtotok(char *s, const char *delim)
 {
 	char *token = NULL;
 	char **alltokens = NULL;
-	int i = 0, arraylength = 0;
-	int slen = 0;
+	int i = 0, arraylength = 0, slen = _strlen(s);
 	char *ssave = NULL;
-	slen = _strlen(s);
 
 	ssave = malloc(sizeof(char) * (slen + 1));
 	if (ssave == NULL)
@@ -34,10 +32,8 @@ char **strtotok(char *s, const char *delim)
 	}
 	while (token != NULL)
 	{
-		printf("Token length: %d\n", _strlen(token));
-		alltokens[i] = malloc(sizeof(unsigned long) * (_strlen(token) + 1));
+		alltokens[i] = malloc(sizeof(char) * (_strlen(token) + 1));
 		alltokens[i] = _strcpy(alltokens[i], token);
-		printf("The token is: %s\nLength is: %d\nSize is: %lu\n", alltokens[i], _strlen(alltokens[i]), sizeof(alltokens[i]));
 		if (alltokens[i] == NULL)
 		{
 			while (i >= 0)
