@@ -8,7 +8,7 @@
  *
  */
 
-void pathhelp(char **s, char *path, char **envp)
+void pathhelp(char **s, char *path, char **envp, char *zero)
 {
 	int i = 0, slen, pathreturn;
 	char **tokedpath;
@@ -34,7 +34,7 @@ void pathhelp(char **s, char *path, char **envp)
 			return;
 	}
 	freestrtok(tokedpath);
-	printf("File not found\n");
+	notfound(zero, s[0]);
 }
 
 /**

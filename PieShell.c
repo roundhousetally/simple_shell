@@ -13,6 +13,9 @@ int main(int argc, char *argv[], char **envp)
 	ssize_t linesize = 0;
 	char *buf = NULL;
 	size_t len = 0;
+	char *nomas = "exit\n";
+	char *vars = "env\n";
+	char **env;
 
 	if (argc == -1 || argv[0] == NULL)
 		return (0);
@@ -28,10 +31,22 @@ int main(int argc, char *argv[], char **envp)
 		if (buf == NULL)
 		{
 			free(buf);
-			printf("Failed to store input\n");
+			perror("Failed to store input\n");
 			return (-1);
 		}
-		runit(&buf, envp);
+		if (_strcmp(buf, nomas) == 0)
+			break;
+		if (_strcmp(buf, vars) == 0)
+		{
+			for (env = envp; *env; ++env)
+			{
+				_puts(*env);
+			}
+			free(buf);
+			buf = NULL;
+		}
+		if (buf != NULL)
+			runit(&buf, envp, argv[0]);
 		buf = NULL;
 	}
 	free(buf);
