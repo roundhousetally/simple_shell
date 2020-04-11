@@ -7,7 +7,7 @@
  *
  */
 
-void getpath(char **s, char **envp)
+void getpath(char **s, char **envp, char *zero)
 {
 	int i = 0, n = 0, count = 1;
 	char *setp = "PATH=", *passedpath;
@@ -44,7 +44,7 @@ void getpath(char **s, char **envp)
 				n++;
 			}
 			passedpath[count] = '\0';
-			pathhelp(s, passedpath, envp);
+			pathhelp(s, passedpath, envp, zero);
 			free(passedpath);
 		}
 		i++;

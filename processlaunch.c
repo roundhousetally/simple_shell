@@ -7,7 +7,7 @@
  * Return: void
  */
 
-void runit(char **test, char **envp)
+void runit(char **test, char **envp, char *zero)
 {
 	int i = 0;
 	pid_t pid = 0;
@@ -21,7 +21,7 @@ void runit(char **test, char **envp)
 	free(detest);
 	if ((access(args[0], X_OK) == -1))
 	{
-		getpath(args, envp);
+		getpath(args, envp, zero);
 		freestrtok(args);
 		return;
 	}
