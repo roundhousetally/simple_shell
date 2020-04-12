@@ -4,7 +4,8 @@
  * getpath - getting the path
  * @s: The arguments
  * @envp: Environment
- *
+ * @zero: error code?
+ * Return - void
  */
 
 void getpath(char **s, char **envp, char *zero)

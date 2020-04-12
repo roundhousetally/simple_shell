@@ -1,5 +1,12 @@
 #include "pieshell.h"
 
+/**
+ * notfound - error printing for when a file is not found
+ * @zero: Error code
+ * @file: file unable to find
+ * Return - void
+ */
+
 void notfound(char *zero, char *file)
 {
 	write(STDERR_FILENO, zero, _strlen(zero));

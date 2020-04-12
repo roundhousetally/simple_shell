@@ -4,6 +4,7 @@
  * runit - starts shell processing
  * @test: pointer to cmd string
  * @envp: env vars
+ * @zero: error code
  * Return: void
  */
 

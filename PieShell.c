@@ -13,8 +13,7 @@ int main(int argc, char *argv[], char **envp)
 	ssize_t linesize = 0;
 	char *buf = NULL;
 	size_t len = 0;
-	char *nomas = "exit\n";
-	char *vars = "env\n";
+	char *nomas = "exit\n", *vars = "env\n";
 	char **env;
 
 	if (argc == -1 || argv[0] == NULL)
