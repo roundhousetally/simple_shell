@@ -1,0 +1,60 @@
+.\" Manpage for simple_shell project.
+.TH Pieshell 1 "12 April 2020" "1.0" "PieShell man page"
+.SH NAME
+Pieshell - a simple shell implementation
+.SH SYNOPSIS
+"./Pieshell"
+
+#include "pieshell.h"
+
+.SH DESCRIPTION
+Pieshell is a custom UNIX command line interpreter built for Holberton School.
+
+This shell supports arguments and can be ran in interactive and non-interactive
+mode.
+
+.SH RETURN VALUE
+Pieshell returns the status of the last statement executed in the function.
+
+.SH SYNTAX
+$ <command> <flags or options> <argument 1> <argument 2> ...
+
+Non Interactive Mode:
+
+$ <command> | ./Pieshell
+
+.SH EXAMPLES
+
+$ cat testfile
+
+$ ls -al
+
+Non-Interactive Mode Example:
+
+$ echo "ls" | ./Pieshell
+
+.SH BUILTIN COMMANDS
+
+.SS env
+- prints the current environmental variables to the standard output.
+
+.SS exit
+- exits the shell
+
+.SH ARGUMENTS
+The shell accepts command arguments.
+
+.SH SEE ALSO
+dash(1)
+
+.SH BUGS
+No known bugs
+
+
+.SH AUTHORS
+
+Lance Burklin
+      https://github.com/lancewburklin
+
+Tahlia Roper
+       https://github.com/roundhousetally

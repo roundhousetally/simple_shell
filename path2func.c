@@ -5,7 +5,7 @@
  * @s: Arguments entered
  * @path: The PATH
  * @envp: Environment variables
- * @zero: error code
+ * @zero: argv[0]
  */
 
 void pathhelp(char **s, char *path, char **envp, char *zero)

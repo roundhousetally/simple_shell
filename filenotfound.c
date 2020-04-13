@@ -2,7 +2,7 @@
 
 /**
  * notfound - error printing for when a file is not found
- * @zero: Error code
+ * @zero: argv[0]
  * @file: file unable to find
  * Return - void
  */

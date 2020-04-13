@@ -4,7 +4,7 @@
  * getpath - getting the path
  * @s: The arguments
  * @envp: Environment
- * @zero: error code?
+ * @zero: argv[0]
  * Return - void
  */
 
