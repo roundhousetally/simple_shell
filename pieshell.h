@@ -13,8 +13,8 @@
 /** Launch Function */
 void runit(char **test, char **envp, char *zero);
 void moneyp(void);
-void getpath(char **s, char **envp, char *zero);
-void pathhelp(char **s, char *path, char **envp, char *zero);
+int getpath(char **s, char **envp);
+int pathhelp(char **s, char *path, char **envp);
 int pathexec(char **s, char **tokedpath, char **envp, int i);
 
 /** Utility Functions */
@@ -29,5 +29,6 @@ char *_strdup(char *str);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
 void notfound(char *zero, char *file);
+int comparepath(char **s, char **envp, int i, int n);
 
 #endif

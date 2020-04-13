@@ -15,11 +15,13 @@ int main(int argc, char *argv[], char **envp)
 	size_t len = 0;
 	char *nomas = "exit\n", *vars = "env\n";
 	char **env;
+	int flag = 0;
 
 	if (argc == -1 || argv[0] == NULL)
 		return (0);
 	while (1)
 	{
+		flag = 0;
 		moneyp();
 		linesize = getline(&buf, &len, stdin);
 		if (linesize == -1)
@@ -42,10 +44,16 @@ int main(int argc, char *argv[], char **envp)
 				_puts(*env);
 			}
 			free(buf);
+			flag = 1;
 			buf = NULL;
 		}
-		if (buf != NULL)
+		if (flag == 0 && buf != NULL && (_strcmp(buf, "\n") != 0))
+		{
 			runit(&buf, envp, argv[0]);
+			flag = 1;
+		}
+		else if (flag == 0 && _strcmp(buf, "\n") == 0)
+			continue;
 		buf = NULL;
 	}
 	free(buf);

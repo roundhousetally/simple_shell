@@ -6,9 +6,10 @@
  * @path: The PATH
  * @envp: Environment variables
  * @zero: argv[0]
+ * Return: 0 for a fail, 1 for success
  */
 
-void pathhelp(char **s, char *path, char **envp, char *zero)
+int pathhelp(char **s, char *path, char **envp)
 {
 	int i = 0, slen, pathreturn;
 	char **tokedpath;
@@ -27,14 +28,14 @@ void pathhelp(char **s, char *path, char **envp, char *zero)
 		_strcat(tokedpath[i], s[0]);
 		pathreturn = pathexec(s, tokedpath, envp, i);
 		if (pathreturn == -1)
-			return;
+			return (0);
 		else if (pathreturn == 0)
 			i++;
 		else
-			return;
+			return (1);
 	}
 	freestrtok(tokedpath);
-	notfound(zero, s[0]);
+	return (0);
 }
 
 /**
