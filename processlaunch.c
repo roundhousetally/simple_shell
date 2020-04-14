@@ -10,8 +10,8 @@
 
 void runit(char **test, char **envp, char *zero)
 {
-	int i = 0;
-	pid_t pid = 0;
+	int i = 0, flag = 0;
+	pid_t pid;
 	char **args = NULL;
 	char *detest = *test;
 
@@ -20,31 +20,34 @@ void runit(char **test, char **envp, char *zero)
 	detest[i] = '\0';
 	args = strtotok(detest, " ");
 	free(detest);
-	if ((access(args[0], X_OK) == -1))
+	flag = getpath(args, envp);
+	if (flag == 1)
 	{
-		getpath(args, envp, zero);
 		freestrtok(args);
 		return;
 	}
-	pid = fork();
+	if (flag == 0)
+		pid = fork();
 	if (pid == 0)
 	{
 		if (execve(args[0], args, envp) == -1)
 		{
+			notfound(zero, args[0]);
 			freestrtok(args);
-			printf("File not found\n");
-			return;
+			exit(1);
 		}
+		exit(1);
 	}
 	else if (pid == -1)
 	{
 		freestrtok(args);
-		printf("Process failed\n");
+		_puts("Process failed\n");
 		return;
 	}
 	else
 	{
 		freestrtok(args);
 		wait(NULL);
+		return;
 	}
 }
