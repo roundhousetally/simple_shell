@@ -5,7 +5,7 @@
  * @s: The arguments
  * @envp: Environment
  *
- * Return: 0 for error, 1 for success
+ * Return: 0 on success, 1 for failure
  */
 
 int getpath(char **s, char **envp)
@@ -30,8 +30,8 @@ int getpath(char **s, char **envp)
 		i++;
 	}
 	if (flag == 0)
-		return (0);
-	return (1);
+		return (1); /** is this correct? */
+	return (0);
 }
 
 /**
@@ -40,7 +40,7 @@ int getpath(char **s, char **envp)
  * @envp: Environment variables
  * @i: A number
  * @n: - a Number
- * Return: 0 for a fail, 1 for success
+ * Return: 0 for success, 1 for failure
  */
 
 int comparepath(char **s, char **envp, int i, int n)
@@ -70,5 +70,5 @@ int comparepath(char **s, char **envp, int i, int n)
 	passedpath[count] = '\0';
 	flag = pathhelp(s, passedpath, envp);
 	free(passedpath);
-	return (flag);
+	return (flag); /** is this going to be 0 ? */
 }

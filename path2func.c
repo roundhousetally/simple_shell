@@ -5,7 +5,7 @@
  * @s: Arguments entered
  * @path: The PATH
  * @envp: Environment variables
- * Return: 0 for a fail, 1 for success
+ * Return: 0 success, 1 for failure
  */
 
 int pathhelp(char **s, char *path, char **envp)
@@ -23,7 +23,7 @@ int pathhelp(char **s, char *path, char **envp)
 		{
 			free(save);
 			freestrtok(tokedpath);
-			return (1);
+			return (0);
 		}
 		free(tokedpath[i]);
 		tokedpath[i] = malloc(sizeof(char) * (slen + _strlen(s[0]) + 3));
@@ -33,11 +33,11 @@ int pathhelp(char **s, char *path, char **envp)
 		_strcat(tokedpath[i], s[0]);
 		pathreturn = pathexec(s, tokedpath, envp, i);
 		if (pathreturn == -1)
-			return (0);
+			return (1);
 		else if (pathreturn == 0)
 			i++;
 		else
-			return (1);
+			return (0);
 	}
 	freestrtok(tokedpath);
 	return (0);
