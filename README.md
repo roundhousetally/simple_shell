@@ -9,11 +9,11 @@ $ git clone https://github.com/roundhousetally/simple_shell.git
 ````
 ### Compile using gcc 4.8.4
 
-`gcc -Wall -Werror -Wextra -pedantic *.c -o pieshell`
+`gcc -Wall -Werror -Wextra -pedantic *.c -o hsh`
 
 ## How to launch after compilation
 
-`./pieshell`
+`./hsh`
 
 ### Modes
 
