@@ -4,8 +4,8 @@
  * getpath - getting the path
  * @s: The arguments
  * @envp: Environment
- * @zero: argv[0]
- * Return - 0 for error, 1 for success
+ *
+ * Return: 0 for error, 1 for success
  */
 
 int getpath(char **s, char **envp)
@@ -36,14 +36,14 @@ int getpath(char **s, char **envp)
 
 /**
  * comparepath - Compares the path
- * @first: FIrst 5 letters of envp[i]
+ * @s: Arguments
  * @envp: Environment variables
  * @i: A number
  * @n: - a Number
  * Return: 0 for a fail, 1 for success
  */
 
-int comparepath( char **s, char **envp, int i, int n)
+int comparepath(char **s, char **envp, int i, int n)
 {
 	char *passedpath;
 	int flag, count = 1;
@@ -59,7 +59,8 @@ int comparepath( char **s, char **envp, int i, int n)
 		_puts("malloc error\n");
 		return (0);
 	}
-	n = 5;                                                                                                                                                                  count = 0;
+	n = 5;
+	count = 0;
 	while (envp[i][n] != '\0')
 	{
 		passedpath[count] = envp[i][n];
@@ -69,5 +70,5 @@ int comparepath( char **s, char **envp, int i, int n)
 	passedpath[count] = '\0';
 	flag = pathhelp(s, passedpath, envp);
 	free(passedpath);
-	return(flag);
+	return (flag);
 }

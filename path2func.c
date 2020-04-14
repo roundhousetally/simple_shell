@@ -5,7 +5,6 @@
  * @s: Arguments entered
  * @path: The PATH
  * @envp: Environment variables
- * @zero: argv[0]
  * Return: 0 for a fail, 1 for success
  */
 
@@ -20,6 +19,12 @@ int pathhelp(char **s, char *path, char **envp)
 	{
 		slen = _strlen(tokedpath[i]);
 		save = _strdup(tokedpath[i]);
+		if (s[0] == NULL)
+		{
+			free(save);
+			freestrtok(tokedpath);
+			return (1);
+		}
 		free(tokedpath[i]);
 		tokedpath[i] = malloc(sizeof(char) * (slen + _strlen(s[0]) + 3));
 		_strcpy(tokedpath[i], save);

@@ -34,8 +34,9 @@ void runit(char **test, char **envp, char *zero)
 		{
 			notfound(zero, args[0]);
 			freestrtok(args);
-			return;
+			exit(1);
 		}
+		exit(1);
 	}
 	else if (pid == -1)
 	{
@@ -47,5 +48,6 @@ void runit(char **test, char **envp, char *zero)
 	{
 		freestrtok(args);
 		wait(NULL);
+		return;
 	}
 }

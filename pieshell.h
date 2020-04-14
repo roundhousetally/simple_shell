@@ -16,6 +16,7 @@ void moneyp(void);
 int getpath(char **s, char **envp);
 int pathhelp(char **s, char *path, char **envp);
 int pathexec(char **s, char **tokedpath, char **envp, int i);
+int builtins(char *buf, char **envp, char *filename);
 
 /** Utility Functions */
 int _strlen(char *s);
