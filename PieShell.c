@@ -13,12 +13,13 @@ int main(int argc, char *argv[], char **envp)
 	ssize_t linesize = 0;
 	char *buf = NULL;
 	size_t len = 0;
-	int flagexit = 0, count = 0;
+	int flagexit = 0, count = 0, prev;
 
 	if (argc == -1 || argv[0] == NULL)
 		return (0);
 	while (flagexit != 5)
 	{
+		prev = flagexit;
 		count++;
 		moneyp();
 		linesize = getline(&buf, &len, stdin);
@@ -32,6 +33,8 @@ int main(int argc, char *argv[], char **envp)
 	free(buf);
 	if (flagexit == 1)
 		return (127);
+	if (flagexit == 5)
+		return (prev);
 	return (0);
 }
 
