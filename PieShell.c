@@ -13,24 +13,25 @@ int main(int argc, char *argv[], char **envp)
 	ssize_t linesize = 0;
 	char *buf = NULL;
 	size_t len = 0;
-	int flagexit = 0;
+	int flagexit = 0, count = 0;
 
 	if (argc == -1 || argv[0] == NULL)
 		return (0);
-	while (flagexit == 0 || flagexit == -1)
+	while (flagexit != 5)
 	{
+		count++;
 		moneyp();
 		linesize = getline(&buf, &len, stdin);
 		if (linesize == -1)
 		{
 			break;
 		}
-		flagexit = builtins(buf, envp, argv[0]);
+		flagexit = builtins(buf, envp, argv[0], count);
 		buf = NULL;
 	}
 	free(buf);
-	if (flagexit == -1)
-		return (1);
+	if (flagexit == 1)
+		return (127);
 	return (0);
 }
 
@@ -39,11 +40,12 @@ int main(int argc, char *argv[], char **envp)
  * @buf: Buffer
  * @envp: Environment variables
  * @filename: Name of the executed file
+ * @count: Counts the number of times the shell is run
  *
  * Return: 1 for exit, 0 for continue
  */
 
-int builtins(char *buf, char **envp, char *filename)
+int builtins(char *buf, char **envp, char *filename, int count)
 {
 	int flagexit = 0;
 	int flag = 0;
@@ -52,7 +54,7 @@ int builtins(char *buf, char **envp, char *filename)
 	if (_strcmp(buf, nomas) == 0)
 	{
 		free(buf);
-		flagexit = 1;
+		flagexit = 5;
 	}
 	if (flagexit == 0 && _strcmp(buf, vars) == 0)
 	{
@@ -66,7 +68,7 @@ int builtins(char *buf, char **envp, char *filename)
 	}
 	if (flagexit == 0 && flag == 0 && buf != NULL && (_strcmp(buf, "\n") != 0))
 	{
-		runit(&buf, envp, filename);
+		flagexit = runit(&buf, envp, filename, count);
 		flag = 1;
 	}
 	else if (flagexit == 0 && flag == 0 && _strcmp(buf, "\n") == 0)

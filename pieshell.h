@@ -11,12 +11,12 @@
 #include <string.h>
 
 /** Launch Function */
-int runit(char **test, char **envp, char *zero);
+int runit(char **test, char **envp, char *zero, int count);
 void moneyp(void);
 int getpath(char **s, char **envp);
 int pathhelp(char **s, char *path, char **envp);
 int pathexec(char **s, char **tokedpath, char **envp, int i);
-int builtins(char *buf, char **envp, char *filename);
+int builtins(char *buf, char **envp, char *filename, int count);
 
 /** Utility Functions */
 int _strlen(char *s);
@@ -29,7 +29,9 @@ void freestrtok(char **string);
 char *_strdup(char *str);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
-void notfound(char *zero, char *file);
+void notfound(char *zero, char *file, int count);
 int comparepath(char **s, char **envp, int i, int n);
+char *itos(int num);
+int runexec(char **args, char **envp, char *zero, int count);
 
 #endif
