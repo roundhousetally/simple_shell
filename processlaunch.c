@@ -5,12 +5,12 @@
  * @test: pointer to cmd string
  * @envp: env vars
  * @zero: error code
- * Return: void
+ * Return: -1 for fail
  */
 
-void runit(char **test, char **envp, char *zero)
+int runit(char **test, char **envp, char *zero)
 {
-	int i = 0, flag = 0;
+	int i = 0, flag = 0, status;
 	pid_t pid;
 	char **args = NULL;
 	char *detest = *test;
@@ -24,8 +24,10 @@ void runit(char **test, char **envp, char *zero)
 	if (flag == 1)
 	{
 		freestrtok(args);
-		return;
+		return (0);
 	}
+	if (flag == -1)
+		return (-1);
 	if (flag == 0)
 		pid = fork();
 	if (pid == 0)
@@ -36,18 +38,20 @@ void runit(char **test, char **envp, char *zero)
 			freestrtok(args);
 			exit(1);
 		}
-		exit(1);
+		exit(0);
 	}
 	else if (pid == -1)
 	{
 		freestrtok(args);
 		_puts("Process failed");
-		return;
+		return (-1);
 	}
 	else
 	{
 		freestrtok(args);
-		wait(NULL);
-		return;
+		waitpid(pid, &status, 0);
+		if (WEXITSTATUS(status) == 1)
+			return (-1);
+		return (0);
 	}
 }

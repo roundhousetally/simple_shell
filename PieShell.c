@@ -17,25 +17,20 @@ int main(int argc, char *argv[], char **envp)
 
 	if (argc == -1 || argv[0] == NULL)
 		return (0);
-	while (flagexit == 0)
+	while (flagexit == 0 || flagexit == -1)
 	{
 		moneyp();
 		linesize = getline(&buf, &len, stdin);
 		if (linesize == -1)
 		{
-			free(buf);
-			return (-1);
-		}
-		if (buf == NULL)
-		{
-			free(buf);
-			_puts("Failed to store input");
-			return (-1);
+			break;
 		}
 		flagexit = builtins(buf, envp, argv[0]);
 		buf = NULL;
 	}
 	free(buf);
+	if (flagexit == -1)
+		return (1);
 	return (0);
 }
 

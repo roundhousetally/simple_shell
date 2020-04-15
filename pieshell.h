@@ -11,7 +11,7 @@
 #include <string.h>
 
 /** Launch Function */
-void runit(char **test, char **envp, char *zero);
+int runit(char **test, char **envp, char *zero);
 void moneyp(void);
 int getpath(char **s, char **envp);
 int pathhelp(char **s, char *path, char **envp);

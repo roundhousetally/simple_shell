@@ -23,7 +23,7 @@ int pathhelp(char **s, char *path, char **envp)
 		{
 			free(save);
 			freestrtok(tokedpath);
-			return (0);
+			return (1);
 		}
 		free(tokedpath[i]);
 		tokedpath[i] = malloc(sizeof(char) * (slen + _strlen(s[0]) + 3));
@@ -33,11 +33,11 @@ int pathhelp(char **s, char *path, char **envp)
 		_strcat(tokedpath[i], s[0]);
 		pathreturn = pathexec(s, tokedpath, envp, i);
 		if (pathreturn == -1)
-			return (1);
+			return (0);
 		else if (pathreturn == 0)
 			i++;
 		else
-			return (0);
+			return (1);
 	}
 	freestrtok(tokedpath);
 	return (0);
@@ -68,12 +68,13 @@ int pathexec(char **s, char **tokedpath, char **envp, int i)
 			{
 				freestrtok(tokedpath);
 				_puts("Failed to execute");
-				return (-1);
+				exit(1);
 			}
+			exit(0);
 		}
 		else if (pid == -1)
 		{
-			puts("fork failure");
+			_puts("fork failure");
 			freestrtok(tokedpath);
 			return (-1);
 		}

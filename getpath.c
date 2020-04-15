@@ -30,8 +30,8 @@ int getpath(char **s, char **envp)
 		i++;
 	}
 	if (flag == 0)
-		return (1); /** is this correct? */
-	return (0);
+		return (0); /** is this correct? */
+	return (1);
 }
 
 /**
@@ -56,7 +56,7 @@ int comparepath(char **s, char **envp, int i, int n)
 	passedpath = malloc(sizeof(char *) * (count + 3));
 	if (passedpath == NULL)
 	{
-		_puts("malloc error\n");
+		_puts("malloc error");
 		return (0);
 	}
 	n = 5;
