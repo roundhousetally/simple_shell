@@ -67,13 +67,13 @@ int pathexec(char **s, char **tokedpath, char **envp, int i)
 			if ((execve(s[0], s, envp) == -1))
 			{
 				freestrtok(tokedpath);
-				printf("Failed to execute\n");
+				_puts("Failed to execute");
 				return (-1);
 			}
 		}
 		else if (pid == -1)
 		{
-			printf("fork failure\n");
+			puts("fork failure");
 			freestrtok(tokedpath);
 			return (-1);
 		}

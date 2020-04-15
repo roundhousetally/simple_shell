@@ -41,7 +41,7 @@ void runit(char **test, char **envp, char *zero)
 	else if (pid == -1)
 	{
 		freestrtok(args);
-		_puts("Process failed\n");
+		_puts("Process failed");
 		return;
 	}
 	else

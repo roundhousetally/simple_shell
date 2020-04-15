@@ -29,7 +29,7 @@ int main(int argc, char *argv[], char **envp)
 		if (buf == NULL)
 		{
 			free(buf);
-			_puts("Failed to store input\n");
+			_puts("Failed to store input");
 			return (-1);
 		}
 		flagexit = builtins(buf, envp, argv[0]);
