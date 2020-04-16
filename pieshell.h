@@ -34,6 +34,6 @@ int comparepath(char **s, char **envp, int i, int n, char *zero, int count);
 char *itos(int num);
 int runexec(char **args, char **envp, char *zero, int count);
 void denied(char *zero, char *file, int count);
-int pathexechelp(pid_t pid, char **args);
+int pathexechelp(pid_t pid, char **args, int exitstat);
 
 #endif

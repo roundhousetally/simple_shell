@@ -63,6 +63,7 @@ int runexec(char **args, char **envp, char *zero, int count)
 {
 	pid_t pid;
 	struct stat exists;
+	int status, exitstat;
 
 	pid = fork();
 	if (pid == 0)
@@ -71,7 +72,7 @@ int runexec(char **args, char **envp, char *zero, int count)
 		{
 			notfound(zero, args[0], count);
 			freestrtok(args);
-			exit(1);
+			exit(127);
 		}
 		if (access(args[0], X_OK) == 0 &&
 		    ((args[0][0] == '.' && args[0][1] == '/') || args[0][0] == '/'))
@@ -84,7 +85,7 @@ int runexec(char **args, char **envp, char *zero, int count)
 		{
 			notfound(zero, args[0], count);
 			freestrtok(args);
-			exit(1);
+			exit(127);
 		}
 		else
 		{
@@ -94,20 +95,21 @@ int runexec(char **args, char **envp, char *zero, int count)
 		}
 		exit(0);
 	}
-	return (pathexechelp(pid, args));
+	waitpid(pid, &status, 0);
+	exitstat = WEXITSTATUS(status);
+	return (pathexechelp(pid, args, exitstat));
 }
 
 /**
  * pathexechelp - Literally just to keep the last function under 40 lines
  * @pid: Pid status
  * @args: Arguments
+ * @exitstat: Status of the exit
  * Return: Status
  */
 
-int pathexechelp(pid_t pid, char **args)
+int pathexechelp(pid_t pid, char **args, int exitstat)
 {
-	int status, exitstat;
-
 	if (pid == -1)
 	{
 		freestrtok(args);
@@ -117,8 +119,6 @@ int pathexechelp(pid_t pid, char **args)
 	else
 	{
 		freestrtok(args);
-		waitpid(pid, &status, 0);
-		exitstat = WEXITSTATUS(status);
 		return (exitstat);
 	}
 	return (1);

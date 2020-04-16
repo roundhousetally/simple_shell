@@ -31,7 +31,7 @@ int main(int argc, char *argv[], char **envp)
 		buf = NULL;
 	}
 	free(buf);
-	if (flagexit == 1)
+	if (flagexit == 1 || flagexit == 127)
 		return (127);
 	if (flagexit == 5)
 		return (prev);
