@@ -67,6 +67,7 @@ int pathexec(char **s, char **tokedpath, char **envp, int i, char *z, int c)
 		return (0);
 	if (access(tokedpath[i], X_OK) == -1)
 	{
+		freestrtok(tokedpath);
 		denied(z, s[0], c);
 		return (126);
 	}

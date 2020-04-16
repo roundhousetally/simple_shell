@@ -43,7 +43,10 @@ int runit(char **test, char **envp, char *zero, int count)
 	if (flag == 0)
 		return (runexec(args, envp, zero, count));
 	if (flag == 126)
+	{
+		freestrtok(args);
 		return (126);
+	}
 	return (1);
 }
 
