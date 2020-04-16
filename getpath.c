@@ -31,7 +31,7 @@ int getpath(char **s, char **envp, char *zero, int count)
 		i++;
 	}
 	if (flag == 0)
-		return (0); /** is this correct? */
+		return (0);
 	if (flag == 126)
 		return (126);
 	return (1);
@@ -67,7 +67,7 @@ int comparepath(char **s, char **envp, int i, int n, char *zero, int count)
 	n = 5;
 	newcount = 0;
 	while (envp[i][n] != '\0')
-	{
+	{ /** copies the path over */
 		passedpath[newcount] = envp[i][n];
 		newcount++;
 		n++;
@@ -75,5 +75,5 @@ int comparepath(char **s, char **envp, int i, int n, char *zero, int count)
 	passedpath[newcount] = '\0';
 	flag = pathhelp(s, passedpath, envp, zero, count);
 	free(passedpath);
-	return (flag); /** is this going to be 0 ? */
+	return (flag);
 }

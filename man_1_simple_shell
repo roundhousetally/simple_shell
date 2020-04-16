@@ -3,7 +3,7 @@
 .SH NAME
 Pieshell - a simple shell implementation
 .SH SYNOPSIS
-"./Pieshell"
+"./hsh"
 
 #include "pieshell.h"
 
@@ -21,7 +21,7 @@ $ <command> <flags or options> <argument 1> <argument 2> ...
 
 Non Interactive Mode:
 
-$ <command> | ./Pieshell
+$ <command> | ./hsh
 
 .SH EXAMPLES
 
@@ -31,7 +31,7 @@ $ ls -al
 
 Non-Interactive Mode Example:
 
-$ echo "ls" | ./Pieshell
+$ echo "ls" | ./hsh
 
 .SH BUILTIN COMMANDS
 

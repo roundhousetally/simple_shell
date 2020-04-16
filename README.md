@@ -24,7 +24,7 @@ executable.
 #### Non-Interactive Mode Example
 
 ````
- ls -al | ./pieshell
+ ls -al | ./hsh
 ````
 ### Built-In Commands
 
