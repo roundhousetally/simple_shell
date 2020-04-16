@@ -15,7 +15,7 @@ int runit(char **test, char **envp, char *zero, int count);
 void moneyp(void);
 int getpath(char **s, char **envp, char *zero, int count);
 int pathhelp(char **s, char *path, char **envp, char *zero, int count);
-int pathexec(char **s, char **tokedpath, char **envp, int i, char *zero, int count);
+int pathexec(char **s, char **tokedpath, char **envp, int i, char *z, int c);
 int builtins(char *buf, char **envp, char *filename, int count);
 
 /** Utility Functions */

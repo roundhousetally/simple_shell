@@ -53,12 +53,12 @@ int pathhelp(char **s, char *path, char **envp, char *zero, int count)
  * @tokedpath: The path in tokens
  * @envp: Environment varaibles
  * @i: The index of tokedapth
- * @zero: Argv[0]
+ * @z: Argv[0]
  * @c: Line count
  * Return: -1 for a failure, 0 for file not found, 1 for success
  */
 
-int pathexec(char **s, char **tokedpath, char **envp, int i, char *zero, int c)
+int pathexec(char **s, char **tokedpath, char **envp, int i, char *z, int c)
 {
 	pid_t pid;
 	struct stat status;
@@ -67,7 +67,7 @@ int pathexec(char **s, char **tokedpath, char **envp, int i, char *zero, int c)
 		return (0);
 	if (access(tokedpath[i], X_OK) == -1)
 	{
-		denied(zero, s[0], c);
+		denied(z, s[0], c);
 		return (126);
 	}
 	if (access(tokedpath[i], X_OK) != -1)
