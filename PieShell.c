@@ -35,6 +35,8 @@ int main(int argc, char *argv[], char **envp)
 		return (127);
 	if (flagexit == 5)
 		return (prev);
+	if (flagexit == 126)
+		return (126);
 	return (0);
 }
 

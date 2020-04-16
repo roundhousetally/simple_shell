@@ -13,9 +13,9 @@
 /** Launch Function */
 int runit(char **test, char **envp, char *zero, int count);
 void moneyp(void);
-int getpath(char **s, char **envp);
-int pathhelp(char **s, char *path, char **envp);
-int pathexec(char **s, char **tokedpath, char **envp, int i);
+int getpath(char **s, char **envp, char *zero, int count);
+int pathhelp(char **s, char *path, char **envp, char *zero, int count);
+int pathexec(char **s, char **tokedpath, char **envp, int i, char *zero, int count);
 int builtins(char *buf, char **envp, char *filename, int count);
 
 /** Utility Functions */
@@ -30,8 +30,10 @@ char *_strdup(char *str);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
 void notfound(char *zero, char *file, int count);
-int comparepath(char **s, char **envp, int i, int n);
+int comparepath(char **s, char **envp, int i, int n, char *zero, int count);
 char *itos(int num);
 int runexec(char **args, char **envp, char *zero, int count);
+void denied(char *zero, char *file, int count);
+int pathexechelp(pid_t pid, char **args);
 
 #endif

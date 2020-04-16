@@ -4,11 +4,12 @@
  * getpath - getting the path
  * @s: The arguments
  * @envp: Environment
- *
+ * @zero: Argv[0]
+ * @count: Line count
  * Return: 0 on success, 1 for failure
  */
 
-int getpath(char **s, char **envp)
+int getpath(char **s, char **envp, char *zero, int count)
 {
 	int i = 0, n = 0, flag;
 	char *setp = "PATH=";
@@ -25,12 +26,14 @@ int getpath(char **s, char **envp)
 		first[n] = '\0';
 		if (_strcmp(first, setp) == 0)
 		{
-			flag = comparepath(s, envp, i, n);
+			flag = comparepath(s, envp, i, n, zero, count);
 		}
 		i++;
 	}
 	if (flag == 0)
 		return (0); /** is this correct? */
+	if (flag == 126)
+		return (126);
 	return (1);
 }
 
@@ -40,35 +43,37 @@ int getpath(char **s, char **envp)
  * @envp: Environment variables
  * @i: A number
  * @n: - a Number
+ * @zero: Argv[0]
+ * @count: Line count
  * Return: 0 for success, 1 for failure
  */
 
-int comparepath(char **s, char **envp, int i, int n)
+int comparepath(char **s, char **envp, int i, int n, char *zero, int count)
 {
 	char *passedpath;
-	int flag, count = 1;
+	int flag, newcount = 1;
 
 	while (envp[i][n] != '\0')
 	{
-		count++;
+		newcount++;
 		n++;
 	}
-	passedpath = malloc(sizeof(char *) * (count + 3));
+	passedpath = malloc(sizeof(char *) * (newcount + 3));
 	if (passedpath == NULL)
 	{
 		_puts("malloc error");
 		return (0);
 	}
 	n = 5;
-	count = 0;
+	newcount = 0;
 	while (envp[i][n] != '\0')
 	{
-		passedpath[count] = envp[i][n];
-		count++;
+		passedpath[newcount] = envp[i][n];
+		newcount++;
 		n++;
 	}
-	passedpath[count] = '\0';
-	flag = pathhelp(s, passedpath, envp);
+	passedpath[newcount] = '\0';
+	flag = pathhelp(s, passedpath, envp, zero, count);
 	free(passedpath);
 	return (flag); /** is this going to be 0 ? */
 }

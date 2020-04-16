@@ -5,10 +5,12 @@
  * @s: Arguments entered
  * @path: The PATH
  * @envp: Environment variables
+ * @zero: Argv[0]
+ * @count: Counts the line
  * Return: 0 success, 1 for failure
  */
 
-int pathhelp(char **s, char *path, char **envp)
+int pathhelp(char **s, char *path, char **envp, char *zero, int count)
 {
 	int i = 0, slen, pathreturn;
 	char **tokedpath;
@@ -31,11 +33,13 @@ int pathhelp(char **s, char *path, char **envp)
 		free(save);
 		_strcat(tokedpath[i], sl);
 		_strcat(tokedpath[i], s[0]);
-		pathreturn = pathexec(s, tokedpath, envp, i);
+		pathreturn = pathexec(s, tokedpath, envp, i, zero, count);
 		if (pathreturn == -1)
 			return (0);
 		else if (pathreturn == 0)
 			i++;
+		else if (pathreturn == 126)
+			return (126);
 		else
 			return (1);
 	}
@@ -49,14 +53,23 @@ int pathhelp(char **s, char *path, char **envp)
  * @tokedpath: The path in tokens
  * @envp: Environment varaibles
  * @i: The index of tokedapth
- *
+ * @zero: Argv[0]
+ * @c: Line count
  * Return: -1 for a failure, 0 for file not found, 1 for success
  */
 
-int pathexec(char **s, char **tokedpath, char **envp, int i)
+int pathexec(char **s, char **tokedpath, char **envp, int i, char *zero, int c)
 {
 	pid_t pid;
+	struct stat status;
 
+	if (stat(tokedpath[i], &status) == -1)
+		return (0);
+	if (access(tokedpath[i], X_OK) == -1)
+	{
+		denied(zero, s[0], c);
+		return (126);
+	}
 	if (access(tokedpath[i], X_OK) != -1)
 	{
 		free(s[0]);

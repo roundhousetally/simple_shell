@@ -20,16 +20,30 @@ int runit(char **test, char **envp, char *zero, int count)
 	detest[i] = '\0';
 	args = strtotok(detest, " ");
 	free(detest);
-	flag = getpath(args, envp);
+	if (args[0] == NULL)
+	{
+		freestrtok(args);
+		return (1);
+	}
+	if (args[0][0] == '/')
+	{
+		return (runexec(args, envp, zero, count));
+	}
+	flag = getpath(args, envp, zero, count);
 	if (flag == 1)
 	{
 		freestrtok(args);
 		return (0);
 	}
 	if (flag == -1)
+	{
+		freestrtok(args);
 		return (-1);
+	}
 	if (flag == 0)
 		return (runexec(args, envp, zero, count));
+	if (flag == 126)
+		return (126);
 	return (1);
 }
 
@@ -45,20 +59,53 @@ int runit(char **test, char **envp, char *zero, int count)
 int runexec(char **args, char **envp, char *zero, int count)
 {
 	pid_t pid;
-	int status, exitstat;
+	struct stat exists;
 
 	pid = fork();
 	if (pid == 0)
 	{
-		if (execve(args[0], args, envp) == -1)
+		if (stat(args[0], &exists) < 0)
 		{
 			notfound(zero, args[0], count);
 			freestrtok(args);
 			exit(1);
 		}
+		if (access(args[0], X_OK) == 0 &&
+		    ((args[0][0] == '.' && args[0][1] == '/') || args[0][0] == '/'))
+		{
+			execve(args[0], args, envp);
+			freestrtok(args);
+			exit(0);
+		}
+		else if (access(args[0], X_OK) == 0)
+		{
+			notfound(zero, args[0], count);
+			freestrtok(args);
+			exit(1);
+		}
+		else
+		{
+			denied(zero, args[0], count);
+			freestrtok(args);
+			exit(126);
+		}
 		exit(0);
 	}
-	else if (pid == -1)
+	return (pathexechelp(pid, args));
+}
+
+/**
+ * pathexechelp - Literally just to keep the last function under 40 lines
+ * @pid: Pid status
+ * @args: Arguments
+ * Return: Status
+ */
+
+int pathexechelp(pid_t pid, char **args)
+{
+	int status, exitstat;
+
+	if (pid == -1)
 	{
 		freestrtok(args);
 		_puts("Process failed");
@@ -69,9 +116,7 @@ int runexec(char **args, char **envp, char *zero, int count)
 		freestrtok(args);
 		waitpid(pid, &status, 0);
 		exitstat = WEXITSTATUS(status);
-		if (exitstat == 1)
-			return (1);
-		return (0);
+		return (exitstat);
 	}
 	return (1);
 }
